@@ -1,7 +1,7 @@
 import { Get, SetMetadata, UseGuards } from '@nestjs/common';
-import { Aaa } from './custom.decorator';
+import { CustomDecorator } from './custom.decorator';
 import { AppService } from './app.service';
-import { AaaGuard } from './custom.guard';
+import { CustomGuard } from './custom.guard';
 import { Bbb, Ccc, Ddd } from './utils/decorators';
 
 @Ddd('fff', 'mistyu')
@@ -10,14 +10,14 @@ export class AppController {
 
   @Get()
   @SetMetadata('aaa', 'admin')
-  @UseGuards(AaaGuard)
+  @UseGuards(CustomGuard)
   getHello(): string {
     return this.appService.getHello();
   }
 
   @Get('Hello2')
-  @Aaa('admin')
-  @UseGuards(AaaGuard)
+  @CustomDecorator('admin')
+  @UseGuards(CustomGuard)
   getHello2(): string {
     return this.appService.getHello();
   }

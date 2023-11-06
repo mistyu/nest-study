@@ -8,7 +8,7 @@ import { Reflector } from '@nestjs/core';
 import { Observable } from 'rxjs';
 
 @Injectable()
-export class AaaGuard implements CanActivate {
+export class CustomGuard implements CanActivate {
   @Inject(Reflector)
   private reflector: Reflector;
 

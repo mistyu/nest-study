@@ -7,11 +7,15 @@ import {
   Controller,
   SetMetadata,
 } from '@nestjs/common';
-import { Aaa } from '../custom.decorator';
-import { AaaGuard } from '../custom.guard';
+import { CustomDecorator } from '../custom.decorator';
+import { CustomGuard } from '../custom.guard';
 
 export function Bbb(path, role) {
-  return applyDecorators(Get(path), Aaa(role), UseGuards(AaaGuard));
+  return applyDecorators(
+    Get(path),
+    CustomDecorator(role),
+    UseGuards(CustomGuard),
+  );
 }
 
 export const Ccc = createParamDecorator(

@@ -1,8 +1,15 @@
-import { Get, Next, SetMetadata, UseGuards } from '@nestjs/common';
+import {
+  Get,
+  Next,
+  SetMetadata,
+  UseGuards,
+  // UseInterceptors,
+} from '@nestjs/common';
 import { CustomDecorator } from './custom.decorator';
 import { AppService } from './app.service';
 import { CustomGuard } from './custom.guard';
 import { Bbb, Ccc, Ddd } from './utils/decorators';
+// import { CustomInterceptor } from './custom.interceptor';
 
 @Ddd('', 'mistyu')
 export class AppController {
@@ -16,6 +23,7 @@ export class AppController {
   }
 
   @Get('Hello2')
+  // @UseInterceptors(CustomInterceptor)
   @CustomDecorator('admin')
   @UseGuards(CustomGuard)
   getHello2(): string {

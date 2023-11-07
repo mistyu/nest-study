@@ -1,10 +1,10 @@
-import { Get, SetMetadata, UseGuards } from '@nestjs/common';
+import { Get, Next, SetMetadata, UseGuards } from '@nestjs/common';
 import { CustomDecorator } from './custom.decorator';
 import { AppService } from './app.service';
 import { CustomGuard } from './custom.guard';
 import { Bbb, Ccc, Ddd } from './utils/decorators';
 
-@Ddd('fff', 'mistyu')
+@Ddd('', 'mistyu')
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
@@ -28,7 +28,8 @@ export class AppController {
   }
 
   @Get('Hello4')
-  getHello4(@Ccc() c) {
+  getHello4(@Next() next, @Ccc() c) {
+    next();
     return c;
   }
 }

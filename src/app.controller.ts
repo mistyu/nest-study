@@ -1,5 +1,6 @@
 import {
   Get,
+  Inject,
   Next,
   SetMetadata,
   UseGuards,
@@ -9,11 +10,15 @@ import { CustomDecorator } from './custom.decorator';
 import { AppService } from './app.service';
 import { CustomGuard } from './custom.guard';
 import { Bbb, Ccc, Ddd } from './utils/decorators';
+import { WINSTON_LOGGER_TOKEN } from './winston/winston.module';
 // import { CustomInterceptor } from './custom.interceptor';
 
 @Ddd('', 'mistyu')
 export class AppController {
   constructor(private readonly appService: AppService) {}
+
+  @Inject(WINSTON_LOGGER_TOKEN)
+  private logger;
 
   @Get()
   @SetMetadata('aaa', 'admin')
@@ -27,6 +32,7 @@ export class AppController {
   @CustomDecorator('admin')
   @UseGuards(CustomGuard)
   getHello2(): string {
+    this.logger.log('Hello2', AppController.name);
     return this.appService.getHello();
   }
 
